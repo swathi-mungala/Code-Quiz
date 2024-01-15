@@ -52,6 +52,7 @@ function showNextQuestion() {
 
 function optionHandler() {
     // To be done
+    // correct or wrong 
 }
 
 function intervalHandler() {
@@ -67,6 +68,9 @@ function intervalHandler() {
 
 function endQuiz() {
     // To be done
+    // get initials
+    // stop timer, show final scores
+    // get initials and store in local storage
 }
 
 startEl.addEventListener('click', startFunction); 
