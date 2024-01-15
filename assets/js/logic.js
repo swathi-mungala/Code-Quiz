@@ -31,8 +31,27 @@ function startFunction() {
 }
 
 function showNextQuestion() {
+    // getting question form questions array
     var question = questions[index];
+    // dispaly question to the user
     questionTitleEl.textContent = question.question;
+
+    // clear previous options 
+    choicesEl.innerHTML = "";
+
+    // loop over all options
+    question.options.forEach(function(choice, i){
+        var btn = document.createElement('button');
+        btn.setAttribute("class","choice");
+        btn.setAttribute("value",choice);
+        btn.textContent = i+1+". " + choice;
+        btn.onclick = optionHandler;
+        choicesEl.appendChild(btn);
+    })
+}
+
+function optionHandler() {
+    // To be done
 }
 
 function intervalHandler() {
