@@ -2,6 +2,7 @@ var startEl = document.getElementById('start');
 var timeEl = document.getElementById('time');
 var timer;
 var timeLeft = 150;
+var index = 0;
 var startScreenEl = document.getElementById('start-screen');
 var questionsEl = document.getElementById('questions');
 var questionTitleEl = document.getElementById('question-title');
@@ -24,6 +25,14 @@ function startFunction() {
 
     // Show questions screen
     questionsEl.removeAttribute("class");
+
+    // Show question
+    showNextQuestion();
+}
+
+function showNextQuestion() {
+    var question = questions[index];
+    questionTitleEl.textContent = question.question;
 }
 
 function intervalHandler() {
