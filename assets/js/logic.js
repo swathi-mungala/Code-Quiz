@@ -15,6 +15,30 @@ var feedbackEl = document.getElementById('feedback');
 function startFunction() {
     // Hide start screen
     startScreenEl.setAttribute("class","hide");
+    
+    // Show time left
+    timeEl.textContent = timeLeft;
+
+    // start timer
+    timer = setInterval(intervalHandler, 1000);
+
+    // Show questions screen
+    questionsEl.removeAttribute("class");
 }
 
-startEl.addEventListener('click', startFunction);
+function intervalHandler() {
+    // decrement time and show updated time
+    timeLeft--;
+    timeEl.textContent = timeLeft;
+
+    if(timeLeft <= 0) {
+        endQuiz();
+        
+    }
+}
+
+function endQuiz() {
+    // To be done
+}
+
+startEl.addEventListener('click', startFunction); 
