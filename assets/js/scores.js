@@ -19,4 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         highscoresList.appendChild(listItem);
         });
     }
+
+    // Event listener for Clear Highscores button
+    document.getElementById('clear').addEventListener('click', clearHighscores);
 });
