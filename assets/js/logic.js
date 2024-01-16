@@ -71,12 +71,8 @@ function showNextQuestion() {
     }, 15000); 
 
 }
-
+    // function on click of answer selection
 function optionHandler(event, question) {
-
-
-
-    // correct or wrong 
     feedbackEl.setAttribute("class", "feedback")
     var currentChoice = event.target.value;
     if(currentChoice == question.answer){
@@ -85,10 +81,10 @@ function optionHandler(event, question) {
     else {
         feedbackEl.textContent = "Wrong";
 
-        // Reduce 15 seconds from the total time only if the answer is correct
+        // Reduce 15 seconds from the total time only if the answer is not correct
         timeLeft -= timePenalty;
         if (timeLeft < 0) {
-            timeLeft = 0; // Ensure timeLeft is not negative
+            timeLeft = 0; 
         }
         timeEl.textContent = timeLeft;
     }
@@ -98,9 +94,9 @@ function optionHandler(event, question) {
     // Check if there are more questions
     if (index < questions.length) {
         // If there are more questions, show the next one
-        setTimeout(showNextQuestion, 1000); // You can adjust the delay as needed
+        setTimeout(showNextQuestion, 1000); 
     } else {
-        // If there are no more questions, end the quiz or perform any final actions
+        // If there are no more questions, end the quiz
         endQuiz();
     }
 }
