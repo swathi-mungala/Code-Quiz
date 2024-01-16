@@ -74,8 +74,7 @@ function showNextQuestion() {
 
 function optionHandler(event, question) {
 
-    // Clear the timer when an option is selected
-    clearTimeout(questionTimer);
+
 
     // correct or wrong 
     feedbackEl.setAttribute("class", "feedback")
@@ -84,18 +83,27 @@ function optionHandler(event, question) {
         feedbackEl.textContent = "Correct";
     }
     else {
-        feedbackEl.textContent = "Incorrect";
-    }
+        feedbackEl.textContent = "Wrong";
+        // Clear the timer when an option is wrong
+        //clearTimeout(questionTimer);
 
-    // Check if the question was answered before the timer expiration
-    if (questionTimer) {
-        // Reduce 15 seconds from the total time
+        // Reduce 15 seconds from the total time only if the answer is correct
         timeLeft -= timePenalty;
         if (timeLeft < 0) {
             timeLeft = 0; // Ensure timeLeft is not negative
         }
         timeEl.textContent = timeLeft;
     }
+
+    // Check if the question was answered before the timer expiration
+    // if (questionTimer) {
+    //     // Reduce 15 seconds from the total time
+    //     timeLeft -= timePenalty;
+    //     if (timeLeft < 0) {
+    //         timeLeft = 0; // Ensure timeLeft is not negative
+    //     }
+    //     timeEl.textContent = timeLeft;
+    // }
 
     // Move to the next question
     index++;
@@ -122,10 +130,25 @@ function intervalHandler() {
 }
 
 function endQuiz() {
-    // To be done
-    // get initials
-    // stop timer, show final scores
-    // get initials and store in local storage
+    clearInterval(timer);
+
+    // Hide questions and feedback elements
+    questionsEl.setAttribute("class", "hide");
+    feedbackEl.textContent = "";
+
+    // Show the end screen
+    endScreenEl.removeAttribute("class");
+
+    // Display the final score
+    var finalScoreEl = document.getElementById('final-score');
+    finalScoreEl.textContent = "Your Final Score: " + timeLeft;
+
+    // Handle the submission of initials
+    submitEl.addEventListener('click', function() {
+        var initials = initialsEl.value.trim(); // Get the initials from the input field
+        // Store the initials and score in local storage or perform any other desired action
+        console.log("Initials: " + initials + ", Score: " + timeLeft);
+    });
 }
 
 startEl.addEventListener('click', startFunction); 
