@@ -11,5 +11,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Retrieve highscores from local storage
         var highscores = JSON.parse(localStorage.getItem('highscores')) || [];
+
+        // Display highscores
+        highscores.forEach(function(score) {
+        var listItem = document.createElement('li');
+        listItem.textContent = score.initials + ': ' + score.score;
+        highscoresList.appendChild(listItem);
+        });
     }
 });
