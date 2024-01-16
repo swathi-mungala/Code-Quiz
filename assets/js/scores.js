@@ -8,5 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function renderHighscores() {
         var highscoresList = document.getElementById('highscores');
         highscoresList.innerHTML = ''; // Clear existing entries
+
+        // Retrieve highscores from local storage
+        var highscores = JSON.parse(localStorage.getItem('highscores')) || [];
     }
 });
