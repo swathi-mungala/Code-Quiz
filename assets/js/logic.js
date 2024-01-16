@@ -45,14 +45,21 @@ function showNextQuestion() {
         btn.setAttribute("class","choice");
         btn.setAttribute("value",choice);
         btn.textContent = i+1+". " + choice;
-        btn.onclick = optionHandler;
         choicesEl.appendChild(btn);
     })
+    // getting all the choices
+    choiceButtonEl = document.querySelectorAll('.choice');
+    // attaching event to each option
+    choiceButtonEl.forEach(function(choice, i){
+        choiceButtonEl[i].addEventListener('click', optionHandler);
+    })
+
 }
 
-function optionHandler() {
+function optionHandler(event) {
     // To be done
     // correct or wrong 
+    console.log(event.target.value);
 }
 
 function intervalHandler() {
