@@ -22,4 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Event listener for Clear Highscores button
     document.getElementById('clear').addEventListener('click', clearHighscores);
+
+    // Initial rendering of highscores
+    renderHighscores();
 });
