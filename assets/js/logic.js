@@ -132,9 +132,19 @@ function endQuiz() {
 
     // Handle the submission of initials
     submitEl.addEventListener('click', function() {
-        var initials = initialsEl.value.trim(); // Get the initials from the input field
-        // Store the initials and score in local storage or perform any other desired action
-        console.log("Initials: " + initials + ", Score: " + timeLeft);
+        // Get the initials from the input field
+        var initials = initialsEl.value.trim(); 
+        // Store the initials and score in local storage
+        var initials = initialsEl.value.trim();
+
+        // Store the initials and score in local storage
+        var scoreData = { initials: initials, score: timeLeft };
+        var highscores = JSON.parse(localStorage.getItem('highscores')) || [];
+        highscores.push(scoreData);
+        localStorage.setItem('highscores', JSON.stringify(highscores));
+    
+        // Redirect to the highscores page
+        window.location.href = 'highscores.html';
     });
 }
 
