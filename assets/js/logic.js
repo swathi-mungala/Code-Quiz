@@ -1,7 +1,9 @@
 var startEl = document.getElementById('start');
 var timeEl = document.getElementById('time');
 var timer;
-var timeLeft = 150;
+var questionTimer;
+var timePenalty = 15;
+var timeLeft = 75;
 var index = 0;
 var startScreenEl = document.getElementById('start-screen');
 var questionsEl = document.getElementById('questions');
@@ -38,6 +40,10 @@ function showNextQuestion() {
 
     // clear previous options 
     choicesEl.innerHTML = "";
+    // declaring feedback element
+    feedbackEl.innerHTML = "";
+
+    clearInterval(questionTimer);
 
     // loop over all options
     question.options.forEach(function(choice, i){
@@ -51,15 +57,57 @@ function showNextQuestion() {
     choiceButtonEl = document.querySelectorAll('.choice');
     // attaching event to each option
     choiceButtonEl.forEach(function(choice, i){
-        choiceButtonEl[i].addEventListener('click', optionHandler);
-    })
+        choiceButtonEl[i].addEventListener('click', function(event){
+            optionHandler(event, question);
+        });
+            
+    });
+
+    // Set up a timer for each question
+    questionTimer = setTimeout(function() {
+        // Move to the next question if no option is selected within the time limit 15 seconds
+        index++;
+        showNextQuestion();
+    }, 15000); 
 
 }
 
-function optionHandler(event) {
-    // To be done
+function optionHandler(event, question) {
+
+    // Clear the timer when an option is selected
+    clearTimeout(questionTimer);
+
     // correct or wrong 
-    console.log(event.target.value);
+    feedbackEl.setAttribute("class", "feedback")
+    var currentChoice = event.target.value;
+    if(currentChoice == question.answer){
+        feedbackEl.textContent = "Correct";
+    }
+    else {
+        feedbackEl.textContent = "Incorrect";
+    }
+
+    // Check if the question was answered before the timer expiration
+    if (questionTimer) {
+        // Reduce 15 seconds from the total time
+        timeLeft -= timePenalty;
+        if (timeLeft < 0) {
+            timeLeft = 0; // Ensure timeLeft is not negative
+        }
+        timeEl.textContent = timeLeft;
+    }
+
+    // Move to the next question
+    index++;
+
+    // Check if there are more questions
+    if (index < questions.length) {
+        // If there are more questions, show the next one
+        setTimeout(showNextQuestion, 1000); // You can adjust the delay as needed
+    } else {
+        // If there are no more questions, end the quiz or perform any final actions
+        endQuiz();
+    }
 }
 
 function intervalHandler() {
