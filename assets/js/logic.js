@@ -84,8 +84,6 @@ function optionHandler(event, question) {
     }
     else {
         feedbackEl.textContent = "Wrong";
-        // Clear the timer when an option is wrong
-        //clearTimeout(questionTimer);
 
         // Reduce 15 seconds from the total time only if the answer is correct
         timeLeft -= timePenalty;
@@ -95,17 +93,6 @@ function optionHandler(event, question) {
         timeEl.textContent = timeLeft;
     }
 
-    // Check if the question was answered before the timer expiration
-    // if (questionTimer) {
-    //     // Reduce 15 seconds from the total time
-    //     timeLeft -= timePenalty;
-    //     if (timeLeft < 0) {
-    //         timeLeft = 0; // Ensure timeLeft is not negative
-    //     }
-    //     timeEl.textContent = timeLeft;
-    // }
-
-    // Move to the next question
     index++;
 
     // Check if there are more questions
